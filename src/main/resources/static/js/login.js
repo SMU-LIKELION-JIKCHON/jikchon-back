@@ -1,4 +1,4 @@
-const REGEX_PHONENUMBER = /^01([0|1|6|7|8|9])-?([0-9]{4})-?([0-9]{4})$/; // 앞자리가 01이며 (0,1,6,7,8,9) 이며 중간에 4자리, 세번째는 4자리인 전화번호
+const REGEX_PHONENUMBER = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/; // 앞자리가 01이며 (0,1,6,7,8,9) 이며 중간에 3~4자리, 세번째는 4자리인 전화번호
 const REGEX_PASSWORD = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/; // 영어와 숫자를 포함한 8자리 이상의 비밀번호
 
 const inputUserID = document.getElementById('phoneNumber');
@@ -36,7 +36,7 @@ function login() {
       if (response.status === 200) {
         return response.json();
       } else {
-        throw new Error(response.status, '로그인 실패');
+        throw new Error(error);
       }
     })
     .then(response => {
@@ -44,7 +44,7 @@ function login() {
         localStorage.setItem('expires_in', response.data.expiresIn);
         localStorage.setItem('user_role', response.data.role);
         window.alert('로그인에 성공하였습니다.');
-        window.location.href = '/';
+        window.location.href = '/main-home1';
     })
     .catch(error => {
       console.error('Error:', error)

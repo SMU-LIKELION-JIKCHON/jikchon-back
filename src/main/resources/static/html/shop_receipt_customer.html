@@ -9,8 +9,9 @@
   <link href="../css/footer.css" rel="stylesheet">
   <link href="../css/con_shop_receipt.css" rel="stylesheet">
 
-  <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-  <script type = "module" src = "../js/con_shop_receipt.js"></script>
+  <script src = "../js/con_shop_receipt.js"></script>
+  <script type = "module" src="../js/navbar.js" defer></script>
+  <script type = "module" src="../js/common/jwt_token_check.js" defer></script>
 
   <title>직촌 - 영수증</title>
 </head>
@@ -24,16 +25,16 @@
   </header>
 
   <nav>
-    <a id="back-button">
+    <a class="back-button" href="">
       <img src="../images/back_icon.svg">
     </a>
-    <a id="cart-button">
+    <a class="cart-button" href="">
       <img src="../images/cart_icon.svg">
     </a>
-    <a id="home-button" href="../html/main-home1.html">
+    <a class="home-button" href="">
       <img src="../images/home_icon.svg">
     </a>
-    <a id="mypage-button">
+    <a class="mypage-button" href="">
       <img src="../images/mypage_icon.svg">
     </a>
   </nav>
@@ -69,7 +70,5 @@
   </footer>
   
   <script src="../js/header.js"></script>
-  <script type = "module" src="../js/navbar.js"></script>
-  <script type = "module" src="../js/common/jwt_token_check.js"></script>
 </body>
 </html>

@@ -40,7 +40,7 @@ function checkPhoneNumberValid() {
 function checkPhoneNumberNotDuplicated() {
   const phoneNumber = inputPhoneNumber1.value + inputPhoneNumber2.value + inputPhoneNumber3.value;
   // 전화번호 중복 검사
-  fetch('http://jikchon.ap-northeast-2.elasticbeanstalk.com//members/phone-number', {
+  fetch('/members/phone-number', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -55,44 +55,15 @@ function checkPhoneNumberNotDuplicated() {
     } else if (response.status === 403) {
       warningMSGPhoneNumber.innerText = '이미 가입된 전화번호예요.';
       warningPhoneNumber.classList.add('show');
-    } else throw new Error(response.status, '전화번호 조회 실패');
+    } else {
+      warningMSGPhoneNumber.innerText = '전화번호 조회에 실패했어요.';
+      warningPhoneNumber.classList.add('show');
+    }
   })
   .catch(error => {
     console.error(error);
     warningPhoneNumber.classList.add('show');
     warningMSGPhoneNumber.innerText = '전화번호 조회에 실패했어요.';
-  });
-}
-
-function autoLogin() {
-  // 회원가입 후 자동 로그인
-  fetch('/members/login', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      phoneNumber: inputName.value,
-      password: inputPW.value,
-    }),
-  })
-  .then(response => {
-    if (response.status === 200) {
-      return response.json();
-    } else {
-      throw new Error(response.status, '로그인 실패');
-    }
-  })
-  .then(response => {
-    localStorage.setItem('access_token', response.data.token);
-    localStorage.setItem('expires_in', response.data.expiresIn);
-    localStorage.setItem('user_role', response.data.role);
-    window.alert('로그인에 성공하였습니다.');
-    window.location.href = '/';
-  })
-  .catch(error => {
-    console.error('Error:', error)
-    window.alert(`${response.status}: 로그인에 실패하였습니다.`);
   });
 }
 
@@ -131,7 +102,7 @@ btnRegister.addEventListener('click', () => {
     window.alert('전화번호를 올바르게 입력해 주세요.');
   } else {
     const phoneNumber = inputPhoneNumber1.value + inputPhoneNumber2.value + inputPhoneNumber3.value;
-    fetch('http://jikchon.ap-northeast-2.elasticbeanstalk.com//members/signup/customer', {
+    fetch('/members/signup/customer', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -146,10 +117,12 @@ btnRegister.addEventListener('click', () => {
     })
     .then(response => {
       if (response.status === 200) {
-        window.alert('회원가입에 성공하였습니다. 자동으로 로그인합니다.');
-        // 회원가입 후 자동 로그인
-        autoLogin();
-      } else throw new Error(response.status, '회원가입 실패');
+        window.alert('회원가입에 성공하였습니다.');
+        window.location.href = '/login.html';
+      } else {
+        console.log(response);
+        throw new Error(error);
+      }
     })
     .catch(error => {
       console.error(error);

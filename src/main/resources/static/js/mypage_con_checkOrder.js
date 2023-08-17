@@ -1,7 +1,7 @@
-import { checkTokenExistence, checkTokenValid,checkUserRole } from "./common/jwt_token_check.js";
+import { checkTokenExistence, checkTokenValid } from "./common/jwt_token_check";
 
 document.addEventListener("DOMContentLoaded", function() {
-    con_checkOrders();
+    // con_checkOrders();
     getOrders();
 });
 

@@ -16,7 +16,7 @@
     /* justify-content: center; */
     height: 100vh;
     width: auto;
-    margin-top: 70px;
+    margin-top: 1.5rem;
 }
 
 .today-recommend {
@@ -76,41 +76,6 @@ h2 {
     flex-direction: column;
     align-items: center;
     gap: 0.25rem;
-}
-
-.login-text {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.login-text p {
-    height: 3rem;
-    /* align-items: end; */
-}
-
-.login-text a {
-    width: 100%;
-    text-align: center;
-}
-
-.login-text button {
-    /* margin-top: 0.5rem; */
-    padding: 0.5rem;
-    width: 40%;
-    border: none;
-    border-radius: 8px;
-    background-color: #E7E7E7;
-    font-size: medium;
-    margin-bottom: 1.5rem;
-}
-
-.login-text button:hover {
-    background-color: #D92B3A;
-    color: white;
-}
-
-.login-text a:hover {
 }
 
 .prod-info {
@@ -180,7 +145,7 @@ h2 {
 }
 
 hr {
-    width: 100%;
+    width: 25rem;
     height: 0.25rem;
     background: #F8F8F8;
     margin: 0;

@@ -220,44 +220,44 @@ function renderSubCategoryBtn() {
   const categoryDetails = document.getElementById("category-details");
   if (categoryId == 1) {
     categoryDetails.innerHTML = `
-      <button class="fruits" type="button" id="101"><span>과일</span></button>
-      <button class="vegetables" type="button" id="102"><span>채소</span></button>
-      <button class="mushrooms" type="button" id="103"><span>버섯</span></button>
-      <button class="grains" type="button" id="104"><span>곡물</span></button>
-      <button class="driedProduce" type="button" id="105"><span>건농산물</span></button>
+      <button class="fruits" type="button"><span>과일</span></button>
+      <button class="vegetables" type="button"><span>채소</span></button>
+      <button class="mushrooms" type="button"><span>버섯</span></button>
+      <button class="grains" type="button"><span>곡물</span></button>
+      <button class="driedProduce" type="button"><span>건농산물</span></button>
     `;
   }
   else if (categoryId == 2) {
     categoryDetails.innerHTML = `
-      <button class="fruits" type="button" id="201"><span>소</span></button>
-      <button class="vegetables" type="button" id="202"><span>돼지</span></button>
-      <button class="mushrooms" type="button" id="203"><span>닭/오리/알류</span></button>
-      <button class="grains" type="button" id="204"><span>육가공류</span></button>
+      <button class="fruits" type="button"><span>소</span></button>
+      <button class="vegetables" type="button"><span>돼지</span></button>
+      <button class="mushrooms" type="button"><span>닭/오리/알류</span></button>
+      <button class="grains" type="button"><span>육가공류</span></button>
     `;
   }
   else if (categoryId == 3) {
     categoryDetails.innerHTML = `
-      <button class="fruits" type="button" id="301"><span>생선류</span></button>
-      <button class="vegetables" type="button" id="302"><span>건어물</span></button>
-      <button class="mushrooms" type="button" id="303"><span>김/해조류</span></button>
-      <button class="grains" type="button" id="304"><span>해산물/어패류</span></button>
-      <button class="driedProduce" type="button" id="305"><span>수산가공물</span></button>
+      <button class="fruits" type="button"><span>생선류</span></button>
+      <button class="vegetables" type="button"><span>건어물</span></button>
+      <button class="mushrooms" type="button"><span>김/해조류</span></button>
+      <button class="grains" type="button"><span>해산물/어패류</span></button>
+      <button class="driedProduce" type="button"><span>수산가공물</span></button>
     `;
   }
   else if (categoryId == 4) {
     categoryDetails.innerHTML = `
-      <button class="fruits" type="button" id="401"><span>양념류</span></button>
-      <button class="vegetables" type="button" id="402"><span>반찬류</span></button>
-      <button class="mushrooms" type="button" id="403"><span>유제품</span></button>
+      <button class="fruits" type="button"><span>양념류</span></button>
+      <button class="vegetables" type="button"><span>반찬류</span></button>
+      <button class="mushrooms" type="button"><span>유제품</span></button>
     `;
   }
   else {
     categoryDetails.innerHTML = `
-    <button class="fruits" type="button" id="101"><span>과일</span></button>
-    <button class="vegetables" type="button" id="102"><span>채소</span></button>
-    <button class="mushrooms" type="button" id="103"><span>버섯</span></button>
-    <button class="grains" type="button" id="104"><span>곡물</span></button>
-    <button class="driedProduce" type="button" id="105"><span>건농산물</span></button>
+    <button class="fruits" type="button"><span>과일</span></button>
+    <button class="vegetables" type="button"><span>채소</span></button>
+    <button class="mushrooms" type="button"><span>버섯</span></button>
+    <button class="grains" type="button"><span>곡물</span></button>
+    <button class="driedProduce" type="button"><span>건농산물</span></button>
   `;
   }
 }
@@ -286,7 +286,7 @@ function renderProdData(productsData) {
     // li click 시 상세페이지로 이동
     li.addEventListener("click", () => {
       const productId = product.id;
-      window.location.href = `../html/product-info.html?id=${productId}`;
+      window.location.href = `../html/product-info.html`;
     })
 
     productList.appendChild(li);
@@ -294,36 +294,9 @@ function renderProdData(productsData) {
   isLoading = false;
 }
 
-function categoryFiltering() {
-  const categorybtn = document.querySelectorAll(".category-details button");
-  categorybtn.forEach(btn => {
-    btn.addEventListener("click", () => {
-      const categoryID = btn.id;
-      let detailCategoryProd = [];
-      url = `/products?category=${categoryID}&page=0`;
-      pageNum = 0;
-
-      fetch(url, {
-        headers: myHeaders,
-        method: "GET"
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          detailCategoryProd = data.data;
-        })
-        .catch((error) => {
-          console.error("loading fail")
-        });
-      
-      renderProdData(detailCategoryProd.itemList);
-    })
-  })
-}
-
 window.onload = function main() {
   loadProdData();
-  renderProdData(fetchData.itemList);
+  renderProdData(temporaryData1.data.itemList);
   renderSubCategoryBtn();
-  categoryFiltering()
   ProdInfinityScroll();
 }

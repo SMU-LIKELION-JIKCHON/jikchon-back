@@ -110,7 +110,7 @@ function renderProdManageData(data) {
         changeBtn.textContent = '수정하기';
         changeBtn.addEventListener('click', () => {
             const clickedItemId = item.id; // 클릭된 버튼의 항목 ID 가져오기
-            window.location.href = `../html/mypage_sell_enrollItem.html?id=${clickedItemId}`
+            window.location.href = `../html/mypage_sell_enrollItem.html`
         });
 
         const deleteBtn = document.createElement('button');

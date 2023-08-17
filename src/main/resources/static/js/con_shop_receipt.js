@@ -1,27 +1,15 @@
-import { checkTokenExistence, checkTokenValid,checkUserRole } from "./common/jwt_token_check.js";
 document.addEventListener("DOMContentLoaded", function() {
     var idValue = getQueryParamValue('id');
     console.log(currentUrl)
     getData(idValue);
-    con_receipt(idValue);
+    // con_receipt(idValue);
 });
 function getQueryParamValue(paramName){
     var urlParams = new URLSearchParams(window.location.search);
     return urlParams.get(paramName);
 }
 function con_receipt(idValue){
-    if(!checkTokenExistence()){
-        window.alert('로그인이 필요한 서비스입니다. 로그인 화면으로 이동합니다.');
-        window.location.href = './login.html';
-    }else {
-        if (checkUserRole() !== 'customer') {
-          window.alert('잘못된 접근입니다.');
-          window.location.href = './main-home1.html';
-          return;
-        }
-    }
-    checkTokenValid();
-    fetch("/customer/receipt/"+idValue, {
+    fetch("http://jikchon.ap-northeast-2.elasticbeanstalk.com/customer/receipt/"+idValue, {
         method: "GET",
         headers: {
           'Content-Type': "application/json",

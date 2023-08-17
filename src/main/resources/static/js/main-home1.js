@@ -12,7 +12,6 @@ myHeaders.append('Content-Type', 'application/json');
 // 추천 상품 load
 function loadRecommendList() {
     if (checkTokenExistence()) {
-        const head = document.querySelector(".today-recommend");
         fetch(url, {
             headers: myHeaders,
             method: 'GET'
@@ -29,19 +28,15 @@ function loadRecommendList() {
     }
     else {
         const recommendList = document.querySelector(".recommend-list");
-        recommendList.innerHTML = `
-            <div class="login-text">
-                <p id="login-intend">로그인 하고 맞춤 상품 추천 받기!</p>
-                <a href="../html/login.html"><button>로그인</button></a>
-            </div>
-        `
+        const intendLogin = document.createElement("p");
+        intendLogin.innerHTML = "회원가입 하고 맞춤 상품 보러가기!";
+        recommendList.appendChild(intendLogin);
     }
 }
 
 // 추천 상품 render
 function renderRecommendList(products) {
     const productList = document.getElementById("product-list");
-    
     // 데이터를 기반으로 제품 목록을 생성
     products.forEach(product => {
         const li = document.createElement("li");
@@ -61,7 +56,7 @@ function renderRecommendList(products) {
 
         li.addEventListener('click', () => {
             const clickedItemId = product.id;
-            window.location.href = `../product/info?id=${clickedItemId}`;
+            window.location.href = `../html/product-info.html`;
         })
         productList.appendChild(li);
     })
@@ -78,28 +73,27 @@ function attachMenuClickEvent() {
             if (index === 0) {
                 console.log(0);
                 // 농산물 페이지인거 main-home2.js에 넘겨주기 -> 1
-                window.location.href = `../product?id=${index + 1}`;
+                window.location.href = `../html/main-home2.html`;
             }
             else if (index === 1) {
                 console.log(1);
                 // 축산물 페이지인거 main-home2.js에 넘겨주기 -> 2
-                window.location.href = `../product?id=${index + 1}`;
+                window.location.href = `../html/main-home2.html`;
             }
             else if (index === 2) {
                 console.log(2);
                 // 해산물 페이지인거 main-home2.js에 넘겨주기 -> 3
-                window.location.href = `../product.html?id=${index + 1}`;
+                window.location.href = `../html/main-home2.html`;
             }
             else if (index === 3) {
                 console.log(3);
                 // 가공식품 페이지인거 main-home2.js에 넘겨주기 -> 4
-                window.location.href = `../product.html?id=${index + 1}`;
+                window.location.href = `../html/main-home2.html`;
             }
         });
         pageNum++;
     });
 }
-
 
 window.onload = function main() {
     attachMenuClickEvent();
